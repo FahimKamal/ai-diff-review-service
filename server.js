@@ -1,4 +1,5 @@
 import express from 'express';
+import { authMiddleware } from './lib/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,10 @@ app.get('/spec', (req, res) => {
     }
   });
 });
+
+// Apply Bearer Auth Middleware for all /v1/* routes
+app.use('/v1', authMiddleware);
+
 
 // Start server if main module
 if (process.env.NODE_ENV !== 'test') {
