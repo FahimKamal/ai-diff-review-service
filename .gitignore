@@ -1,3 +1,8 @@
 node_modules/
 .env
 *.log
+
+# Assessment private files
+*.eml
+*.pdf
+CANDIDATE-TASK.md
