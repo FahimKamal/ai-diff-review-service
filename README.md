@@ -92,6 +92,40 @@ curl -X POST http://localhost:3000/v1/reviews \
 
 ---
 
+## 💡 Semantic Review Showcase: LLM vs. Mock Engine
+
+While the `mock` provider checks for explicit string patterns (e.g. `eval()`, hardcoded keys), the `llm` provider understands **code logic and semantics**, catching complex bugs that traditional regex engines miss.
+
+### Sample Code Diff
+
+```diff
+diff --git a/src/authService.js b/src/authService.js
+--- a/src/authService.js
++++ b/src/authService.js
+@@ -10,6 +10,8 @@ async function authenticateUser(username, password) {
++  // Insecure reset token generation
++  const resetToken = Math.floor(Math.random() * 1000000).toString();
++  saveToken(user.id, resetToken);
+
+diff --git a/src/userManager.js b/src/userManager.js
+--- a/src/userManager.js
++++ b/src/userManager.js
+@@ -25,6 +25,8 @@ async function notifyActiveUsers(users) {
++  // Off-by-one array index error
++  for (let i = 0; i <= users.length; i++) {
++    sendEmail(users[i].email);
++  }
+```
+
+### Analysis Comparison
+
+| Provider | Findings Count | Findings Detected |
+|----------|----------------|-------------------|
+| **`mock`** | `0` | None (No matching string pattern like `eval` or `console.log`) |
+| **`llm`** | `2` | 1. `[Critical/Security]` Insecure random number generation for security tokens<br>2. `[High/Correctness]` Off-by-one error in loop condition (`i <= users.length`) |
+
+---
+
 ## Deployment (Railway / Render / Cloudflared)
 
 ### Railway Deployment (Recommended)
