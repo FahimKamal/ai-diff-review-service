@@ -2,9 +2,9 @@
 
 ## Submission Overview
 
-- **Service Base URL**: `https://<your-railway-app-name>.up.railway.app` *(or custom URL)*
-- **Bearer Token**: `<configured-bearer-token>`
-- **Repository URL**: `https://github.com/<username>/ai-diff-review-service`
+- **Service Base URL**: `https://ai-diff-review-service-production-7850.up.railway.app`
+- **Bearer Token**: `my-not-so-secret-token-12345`
+- **Repository URL**: `https://github.com/FahimKamal/ai-diff-review-service`
 
 ---
 
