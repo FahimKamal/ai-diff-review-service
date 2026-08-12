@@ -275,8 +275,8 @@ app.use((err, req, res, next) => {
 // ---------------------------------------------------------------------------
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`AI Diff Review Service listening on port ${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`AI Diff Review Service listening on 0.0.0.0:${PORT}`);
     console.log(`  Bearer token: ${process.env.BEARER_TOKEN || '(not set — using default-secret-token)'}`);
   });
 }
